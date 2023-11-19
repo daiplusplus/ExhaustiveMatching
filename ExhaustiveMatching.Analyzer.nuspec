@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>DaiPlusPlus.ExhaustiveMatching.Analyzer</id>
-    <version>0.7.0</version>
+    <version>0.7.1</version>
     <authors>Jeff Walker + Contributors</authors>
     <owners>Jeff Walker</owners>
     <license type="expression">BSD-3-Clause</license>
@@ -28,6 +28,7 @@ hierarchies.
     </dependencies>
   </metadata>
   <files>
-    <file src="ExhaustiveMatching.Analyzer/bin/Release/netstandard2.0/ExhaustiveMatching.Analyzer.dll" target="analyzers/netstandard2.0/cs" />
+    <file src="ExhaustiveMatching.Analyzer.Enums/bin/Release/netstandard2.0/ExhaustiveMatching.Analyzer.Enums.dll" target="analyzers/netstandard2.0/cs" />
+    <file src="ExhaustiveMatching.Analyzer/bin/Release/netstandard2.0/ExhaustiveMatching.Analyzer.dll"             target="analyzers/netstandard2.0/cs" />
   </files>
 </package>
