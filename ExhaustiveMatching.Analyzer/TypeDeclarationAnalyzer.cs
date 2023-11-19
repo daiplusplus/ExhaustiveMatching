@@ -54,7 +54,8 @@ namespace ExhaustiveMatching.Analyzer
             foreach (var superType in closedSuperTypes)
             {
                 var isMember = superType.GetCaseTypes(closedAttribute)
-                                .Any(t => t.EqualsDisregardingNullability(typeSymbol));
+                    .Any(t => t.EqualsDisregardingNullability(typeSymbol));
+
                 if (isMember)
                     continue;
 
@@ -101,10 +102,14 @@ namespace ExhaustiveMatching.Analyzer
               .SelectMany(l => l.Attributes)
               .Where(a =>
               {
+                  if (a is null) return false;
                   var constructorSymbol = context.GetSymbol(a);
-                  var attributeSymbol = constructorSymbol?.ContainingSymbol;
+                  if (constructorSymbol is null) return false;
+
+                  var attributeSymbol = constructorSymbol.ContainingSymbol;
                   return closedAttribute.EqualsDisregardingNullability(attributeSymbol);
-              }).ToList();
+              })
+              .ToList();
 
             return closedAttributes;
         }

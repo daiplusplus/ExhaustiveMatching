@@ -18,8 +18,9 @@ namespace ExhaustiveMatching.Analyzer
         private static readonly ImmutableHashSet<string> _defaultExceptionTypes = new[]
         {
             "ExhaustiveMatchFailedException",
+            "ArgumentExhaustiveMatchFailedException", // <-- For when I define `ExhaustiveMatch.ArgumentFailed( argValue )` so I can use `[CallerArgumentExpression]` in C# 10.0.
             nameof(System.ComponentModel.InvalidEnumArgumentException),
-            nameof(System.ArgumentOutOfRangeException)
+//          nameof(System.ArgumentOutOfRangeException) // <-- Argh, don't use this, it means the analyzer matches non-enum switch expressions, like switch(Char), erk!
         }
             .ToImmutableHashSet(StringComparer.Ordinal);
 
