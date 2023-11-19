@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace ExhaustiveMatching
 {
     [Serializable]
-    public sealed class ExhaustiveMatchFailedException : Exception
+    internal sealed class ExhaustiveMatchFailedException : Exception
     {
         private const string NoValueMessage = "A match that was supposed to be exhaustive failed to match.";
         private const string EnumValueMessage = "'{0}.{1}' was not matched. Match is supposed to be exhaustive.";
