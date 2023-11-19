@@ -18,19 +18,19 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
     /// </summary>
     public abstract partial class DiagnosticVerifier
     {
-        private static readonly MetadataReference CoreLibReference = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
-        private static readonly MetadataReference SystemCoreReference = MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location);
-        private static readonly MetadataReference CSharpSymbolsReference = MetadataReference.CreateFromFile(typeof(CSharpCompilation).Assembly.Location);
-        private static readonly MetadataReference CodeAnalysisReference = MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
-        private static readonly MetadataReference SystemConsoleReference = MetadataReference.CreateFromFile(typeof(Console).Assembly.Location);
-        private static readonly MetadataReference ComponentModelReference = MetadataReference.CreateFromFile(typeof(InvalidEnumArgumentException).Assembly.Location);
+        private static readonly MetadataReference CoreLibReference            = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
+        private static readonly MetadataReference SystemCoreReference         = MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location);
+        private static readonly MetadataReference CSharpSymbolsReference      = MetadataReference.CreateFromFile(typeof(CSharpCompilation).Assembly.Location);
+        private static readonly MetadataReference CodeAnalysisReference       = MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
+        private static readonly MetadataReference SystemConsoleReference      = MetadataReference.CreateFromFile(typeof(Console).Assembly.Location);
+        private static readonly MetadataReference ComponentModelReference     = MetadataReference.CreateFromFile(typeof(InvalidEnumArgumentException).Assembly.Location);
 //      private static readonly MetadataReference ExhaustiveMatchingReference = MetadataReference.CreateFromFile(typeof(ExhaustiveMatch).Assembly.Location);
 
         internal static string DefaultFilePathPrefix = "Test";
-        internal static string CSharpDefaultFileExt = "cs";
-        internal static string TestProjectName = "TestProject";
+        internal static string CSharpDefaultFileExt  = "cs";
+        internal static string TestProjectName       = "TestProject";
 
-        #region  Get Diagnostics
+        #region Get Diagnostics
 
         /// <summary>
         /// Given classes in the form of strings, their language, and an IDiagnosticAnalyzer to apply to it, return the diagnostics found in the string after converting it to a document.
@@ -112,7 +112,7 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
         private static Document[] GetDocuments(IReadOnlyCollection<string> sources)
         {
             var project = CreateProject(sources);
-            var documents = project.Documents.ToArray();
+            var documents = project.Documents.Where(d => d.Name != ExhaustiveTypes.FILE_NAME).ToArray();
 
             if (sources.Count != documents.Length)
             {
@@ -122,9 +122,7 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
             return documents;
         }
 
-        /// <summary>
-        /// Create a Document from a string through creating a project that contains it.
-        /// </summary>
+        /// <summary>Creates a single-document Project using <paramref name="source"/> and returns the <see cref="Document"/> corresponding to <paramref name="source"/>.</summary>
         /// <param name="source">Classes in the form of a string</param>
         /// <returns>A Document created from the source string</returns>
         protected static Document CreateDocument(string source)
@@ -132,9 +130,7 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
             return CreateProject(new[] { source }).Documents.First();
         }
 
-        /// <summary>
-        /// Create a project using the inputted strings as sources.
-        /// </summary>
+        /// <summary>Create a project using the specified strings in <paramref name="sources"/> as source files.</summary>
         /// <param name="sources">Classes in the form of strings</param>
         /// <returns>A Project created out of the Documents created from the source strings</returns>
         private static Project CreateProject(IReadOnlyCollection<string> sources)
@@ -144,9 +140,9 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
 
             var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
 
-            var assemblyPath = Path.GetDirectoryName(typeof(object).Assembly.Location);
+            var assemblyPath      = Path.GetDirectoryName(typeof(object).Assembly.Location);
             var systemRuntimePath = MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "System.Runtime.dll"));
-            var netstandardPath = MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "netstandard.dll"));
+            var netstandardPath   = MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "netstandard.dll"));
 
             var solution = new AdhocWorkspace()
                 .CurrentSolution
@@ -162,13 +158,21 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
 //              .AddMetadataReference(projectId, ExhaustiveMatchingReference)
             ;
 
-            var count = 0;
-            foreach (var source in sources)
+            foreach (var (src,idx) in sources.Select((src, idx) => (src, idx)))
             {
-                var newFileName = fileNamePrefix + count + "." + fileExt;
-                var documentId = DocumentId.CreateNewId(projectId, debugName: newFileName);
-                solution = solution.AddDocument(documentId, newFileName, SourceText.From(source));
-                count++;
+                string newFileName = fileNamePrefix + idx + "." + fileExt;
+                DocumentId documentId = DocumentId.CreateNewId(projectId, debugName: newFileName);
+
+                solution = solution.AddDocument(documentId, newFileName, SourceText.From(src));
+            }
+
+            // add the Exhaustive types:
+            {
+                string newFileName = "ExhaustiveTypes.g.cs";
+                DocumentId documentId = DocumentId.CreateNewId(projectId, debugName: newFileName);
+
+                string csFileSource = ExhaustiveTypes.CSFile;
+                solution = solution.AddDocument(documentId, newFileName, SourceText.From(csFileSource));
             }
 
             var project = solution.GetProject(projectId);
