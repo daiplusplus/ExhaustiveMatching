@@ -1,0 +1,10 @@
+This file was generated from the VS Developer Command Prompt with the command:
+
+```
+REM cd into the ExhaustiveMatching repo root
+sn /k ExhaustiveMatching.strongNameKey.snk
+```
+
+* There is no password on the Strong Name Key file (as SNKs are used for identity, and not authentication).
+* While Strong Names are unnecessary post-.NET Core, they are still necessary for compatibility with consumers targeting .NET Framework 4.x.
+* Strong Naming is configured in `Directory.Build.props`

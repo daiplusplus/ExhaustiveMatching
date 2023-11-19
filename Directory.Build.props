@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <Version>0.6.1-dev</Version>
+    <DebugType>embedded</DebugType>
+
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\ExhaustiveMatching.strongNameKey.snk</AssemblyOriginatorKeyFile>
+
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <!-- Suppress CS1591: Missing XML comment for publicly visible type or member -->
+    <NoWarn>$(NoWarn);1591;</NoWarn>
+  </PropertyGroup>
+</Project>
