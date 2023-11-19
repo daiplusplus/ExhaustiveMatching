@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>ExhaustiveMatching.Analyzer</id>
-    <version>0.6.0-dev</version>
+    <id>DaiPlusPlus.ExhaustiveMatching.Analyzer</id>
+    <version>0.7.0</version>
     <authors>Jeff Walker + Contributors</authors>
     <owners>Jeff Walker</owners>
     <license type="expression">BSD-3-Clause</license>
@@ -24,13 +24,10 @@ hierarchies.
     <tags>analyzers, switch, exhaustive, match, discriminated, union, sum-type</tags>
 
     <dependencies>
-        <group targetFramework="netstandard2.0" />
+      <group targetFramework="netstandard2.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="ExhaustiveMatching/bin/Release/netstandard2.0/ExhaustiveMatching.dll" target="lib/netstandard2.0" />
     <file src="ExhaustiveMatching.Analyzer/bin/Release/netstandard2.0/ExhaustiveMatching.Analyzer.dll" target="analyzers/netstandard2.0/cs" />
-    <file src="ExhaustiveMatching.Analyzer/tools/install.ps1" target="tools" />
-    <file src="ExhaustiveMatching.Analyzer/tools/uninstall.ps1" target="tools" />
   </files>
 </package>
