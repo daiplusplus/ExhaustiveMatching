@@ -37,7 +37,7 @@ namespace ExhaustiveMatching.Analyzer.Testing.Helpers
             var match = NestedMarkerRegex.Matches(source).Single(m => m.Groups["number"].Value == markerString);
             var (line, column) = LineAndColumn(source, match.Index);
             // Get the length, requires we remove any nested markers
-            var length = RemoveMakers(match.Groups["content"].Value).Length;
+            var length = RemoveMarkers(match.Groups["content"].Value).Length;
             return new DiagnosticResultLocation("Test.cs", line, column, length);
         }
 
@@ -53,10 +53,10 @@ namespace ExhaustiveMatching.Analyzer.Testing.Helpers
             return (lineNumber, columnNumber);
         }
 
-        public static string RemoveMakers(string source)
+        public static string RemoveMarkers(string source)
         {
             // Have to recursively remove markers because of nesting
-            return MarkerRegex.Replace(source, m => RemoveMakers(m.Groups["content"].Value));
+            return MarkerRegex.Replace(source, m => RemoveMarkers(m.Groups["content"].Value));
         }
 
         private DiagnosticResultLocation(string path, int line, int column, int length = -1)

@@ -61,7 +61,7 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
         /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the sources</param>
         private static async Task VerifyCSharpDiagnosticsAsync(IReadOnlyCollection<string> sources, DiagnosticAnalyzer analyzer, params DiagnosticResult[] expected)
         {
-            sources = sources.Select(DiagnosticResultLocation.RemoveMakers).ToArray();
+            sources = sources.Select(DiagnosticResultLocation.RemoveMarkers).ToArray();
             var diagnostics = await GetSortedDiagnosticsAsync(sources, analyzer).ConfigureAwait(false);
             VerifyDiagnosticResults(diagnostics, analyzer, expected);
         }
