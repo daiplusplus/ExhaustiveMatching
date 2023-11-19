@@ -10,8 +10,8 @@ namespace ExhaustiveMatching.Analyzer
     internal static class TypeNames
     {
         public const string ExhaustiveMatchFailedException = "ExhaustiveMatching.ExhaustiveMatchFailedException";
-        public const string ClosedAttribute = "ExhaustiveMatching.ClosedAttribute";
-        public static readonly string InvalidEnumArgumentException = typeof(InvalidEnumArgumentException).FullName;
-        public static readonly string Nullable = typeof(System.Nullable<>).FullName;
+        public const string ClosedAttribute                = "ExhaustiveMatching.ClosedAttribute";
+        public const string InvalidEnumArgumentException   = "System.ComponentModel." + nameof(InvalidEnumArgumentException);
+        public const string Nullable                       = "System.Nullable`1"; // i.e. `typeof(System.Nullable<>).FullName`
     }
 }
