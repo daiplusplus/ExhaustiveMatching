@@ -46,14 +46,18 @@ namespace ExhaustiveMatching.Analyzer.Enums
             => context.ReportDiagnostic(Diagnostic.Create(CasePatternNotSupported,
                 switchLabel.GetLocation(), switchLabel));
 
-        private static readonly LocalizableString EM0001Title = LoadString(nameof(Resources.EM0001Title));
-        private static readonly LocalizableString EM0001Message = LoadString(nameof(Resources.EM0001Message));
+        //
+
+        private static readonly LocalizableString EM0001Title       = LoadString(nameof(Resources.EM0001Title));
+        private static readonly LocalizableString EM0001Message     = LoadString(nameof(Resources.EM0001Message));
         private static readonly LocalizableString EM0001Description = LoadString(Resources.EM0001Description);
-        private static readonly LocalizableString EM0002Title = LoadString(nameof(Resources.EM0002Title));
-        private static readonly LocalizableString EM0002Message = LoadString(nameof(Resources.EM0002Message));
+
+        private static readonly LocalizableString EM0002Title       = LoadString(nameof(Resources.EM0002Title));
+        private static readonly LocalizableString EM0002Message     = LoadString(nameof(Resources.EM0002Message));
         private static readonly LocalizableString EM0002Description = LoadString(Resources.EM0002Description);
-        private static readonly LocalizableString EM0101Title = LoadString(nameof(Resources.EM0101Title));
-        private static readonly LocalizableString EM0101Message = LoadString(nameof(Resources.EM0101Message));
+
+        private static readonly LocalizableString EM0101Title       = LoadString(nameof(Resources.EM0101Title));
+        private static readonly LocalizableString EM0101Message     = LoadString(nameof(Resources.EM0101Message));
         private static readonly LocalizableString EM0101Description = LoadString(Resources.EM0101Description);
 
         private const string Category = "Logic";
@@ -66,9 +70,22 @@ namespace ExhaustiveMatching.Analyzer.Enums
             = new DiagnosticDescriptor("EM0002", EM0002Title, EM0002Message, Category,
                 DiagnosticSeverity.Error, isEnabledByDefault: true, EM0002Description);
 
+        // EM0003 // Defined in ExhaustiveMatching.Analyzer
+        // EM0011
+        // EM0012
+        // EM0013
+        // EM0014
+        // EM0015
+        // EM0100
+
         private static readonly DiagnosticDescriptor CasePatternNotSupported
             = new DiagnosticDescriptor("EM0101", EM0101Title, EM0101Message, Category,
                 DiagnosticSeverity.Error, isEnabledByDefault: true, EM0101Description);
+
+         // EM0102 // Defined in ExhaustiveMatching.Analyzer
+         // EM0103
+         // EM0104
+         // EM0105
 
         private static LocalizableResourceString LoadString(string name)
             => new LocalizableResourceString(name, Resources.ResourceManager, typeof(Resources));
