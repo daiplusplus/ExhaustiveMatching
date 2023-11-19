@@ -11,7 +11,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.9.0" PrivateAssets="all" />
+      <!--
+    https://github.com/dotnet/roslyn/blob/main/docs/wiki/NuGet-packages.md
+    Microsoft.CodeAnalysis.CSharp
+        v.4.7.0  => C# 11.0 (Visual Studio 2022 version 17.7, .NET 7)
+        v.4.0.0  => C# 10.0 (Visual Studio 2022 version 17.0, .NET 6)
+        v.3.8.0  => First version with `GeneratorExecutionContext`
+        v.3.3.0  => C#  8.0 (Visual Studio 2019 version 16.3, .NET Core 3.0)
+        v.2.10.0 => C#  7.3 (Visual Studio 2017 version 15.9)
+
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" PrivateAssets="all" />
+    -->
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
     <PackageReference Update="NETStandard.Library" PrivateAssets="all" />
   </ItemGroup>
 

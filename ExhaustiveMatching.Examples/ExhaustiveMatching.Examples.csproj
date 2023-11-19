@@ -9,7 +9,8 @@
 
   <ItemGroup>
     <!-- The `OutputItemType="Analyzer" ReferenceOutputAssembly="false"` attributes are explained here: https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview -->
-    <ProjectReference Include="..\ExhaustiveMatching.Analyzer.Enums\ExhaustiveMatching.Analyzer.Enums.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="True" />
+    <ProjectReference Include="..\ExhaustiveMatching.Analyzer.Enums\ExhaustiveMatching.Analyzer.Enums.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\ExhaustiveMatching\ExhaustiveMatching.csproj" />
   </ItemGroup>
 
 </Project>
