@@ -4,7 +4,6 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1;</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <AnalysisLevel>latest</AnalysisLevel>

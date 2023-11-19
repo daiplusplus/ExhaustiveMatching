@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExhaustiveMatching.Analyzer" Version="0.5.0" />
+    <!-- The `OutputItemType="Analyzer" ReferenceOutputAssembly="false"` attributes are explained here: https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview -->
+    <ProjectReference Include="..\ExhaustiveMatching.Analyzer.Enums\ExhaustiveMatching.Analyzer.Enums.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="True" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@ namespace Examples
             switch (animal)
             {
                 default:
-                    throw ExhaustiveMatch.Failed(animal);
+                    throw ExhaustiveMatching.ExhaustiveMatch.Failed(animal);
                 case ICat cat:
                     Console.WriteLine("Cat: " + cat);
                     break;
