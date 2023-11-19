@@ -1,7 +1,7 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32602.291
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.34221.33
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExhaustiveMatching.Analyzer", "ExhaustiveMatching.Analyzer\ExhaustiveMatching.Analyzer.csproj", "{B6858B7F-9FE4-4047-A1C1-FEA6F4D22A78}"
 EndProject
@@ -32,9 +32,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{539D20C4-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExhaustiveMatching.Internal.Tests", "ExhaustiveMatching.Internal.Tests\ExhaustiveMatching.Internal.Tests.csproj", "{A8F44A64-2D0C-4398-AAC9-6AEE21EEB849}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExhaustiveMatching.Analyzer.Enums.Tests", "ExhaustiveMatching.Analyzer.Enums.Tests\ExhaustiveMatching.Analyzer.Enums.Tests.csproj", "{ADE686DC-5C89-400F-85E1-BACAF03D42DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExhaustiveMatching.Analyzer.Enums.Tests", "ExhaustiveMatching.Analyzer.Enums.Tests\ExhaustiveMatching.Analyzer.Enums.Tests.csproj", "{ADE686DC-5C89-400F-85E1-BACAF03D42DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExhaustiveMatching.Analyzer.Testing", "ExhaustiveMatching.Analyzer.Testing\ExhaustiveMatching.Analyzer.Testing.csproj", "{ADB96365-D9DF-484B-9E02-0DC4EFEAEF04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExhaustiveMatching.Analyzer.Testing", "ExhaustiveMatching.Analyzer.Testing\ExhaustiveMatching.Analyzer.Testing.csproj", "{ADB96365-D9DF-484B-9E02-0DC4EFEAEF04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
