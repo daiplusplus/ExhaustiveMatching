@@ -129,7 +129,7 @@ namespace ExhaustiveMatching.Analyzer
                 .Select(e => e.Type);
 
             var duplicates = typeSyntaxes
-                .GroupBy(t => context.GetSymbol(t)!)
+                .GroupBy(t => context.GetSymbol(t)!, SymbolEqualityComparer.Default)
                 .SelectMany(g => g.Skip(1).Select(type => (g.Key, type)));
 
             foreach (var (symbol, syntax) in duplicates)

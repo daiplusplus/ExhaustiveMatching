@@ -199,7 +199,7 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
             var builder = new StringBuilder();
             for (int i = 0; i < diagnostics.Length; ++i)
             {
-                builder.AppendLine("// " + diagnostics[i]);
+                _ = builder.AppendLine("// " + diagnostics[i]);
 
                 var analyzerType = analyzer.GetType();
                 var rules = analyzer.SupportedDiagnostics;
@@ -211,7 +211,7 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
                         var location = diagnostics[i].Location;
                         if (location == Location.None)
                         {
-                            builder.AppendFormat("GetGlobalResult({0}.{1})", analyzerType.Name, rule.Id);
+                            _ = builder.AppendFormat("GetGlobalResult({0}.{1})", analyzerType.Name, rule.Id);
                         }
                         else
                         {
@@ -221,7 +221,7 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
                             string resultMethodName = diagnostics[i].Location.SourceTree.FilePath.EndsWith(".cs") ? "GetCSharpResultAt" : "GetBasicResultAt";
                             var linePosition = diagnostics[i].Location.GetLineSpan().StartLinePosition;
 
-                            builder.AppendFormat("{0}({1}, {2}, {3}.{4})",
+                            _ = builder.AppendFormat("{0}({1}, {2}, {3}.{4})",
                                 resultMethodName,
                                 linePosition.Line + 1,
                                 linePosition.Character + 1,
@@ -231,10 +231,10 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
 
                         if (i != diagnostics.Length - 1)
                         {
-                            builder.Append(',');
+                            _ = builder.Append(',');
                         }
 
-                        builder.AppendLine();
+                        _ = builder.AppendLine();
                         break;
                     }
                 }

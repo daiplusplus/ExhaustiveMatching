@@ -6,6 +6,7 @@ namespace ExhaustiveMatching.Analyzer.Semantics
 {
     public static class SymbolExtensions
     {
+        /// <summary>Concatenates <paramref name="symbol"/>'s <see cref="ISymbol.Name"/> with all of its containing <see cref="ISymbol.ContainingNamespace"/> names.</summary>
         public static string GetFullName(this ISymbol symbol)
         {
             var ns = symbol.ContainingNamespace;

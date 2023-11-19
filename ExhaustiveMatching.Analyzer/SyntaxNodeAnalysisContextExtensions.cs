@@ -9,16 +9,11 @@ namespace ExhaustiveMatching.Analyzer
     public static class SyntaxNodeAnalysisContextExtensions
     {
         #region Report Not Exhuastive Diagnostics
-        public static void ReportNotExhaustiveObjectSwitch(
-            this SyntaxNodeAnalysisContext context,
-            SyntaxToken switchKeyword,
-            ITypeSymbol[] uncoveredTypes)
+        public static void ReportNotExhaustiveObjectSwitch(this SyntaxNodeAnalysisContext context, SyntaxToken switchKeyword, ITypeSymbol[] uncoveredTypes)
         {
             foreach (var uncoveredType in uncoveredTypes.OrderBy(t => t.Name))
             {
-                var diagnostic = Diagnostic.Create(
-                    Diagnostics.NotExhaustiveObjectSwitch,
-                    switchKeyword.GetLocation(), uncoveredType.GetFullName());
+                var diagnostic = Diagnostic.Create(Diagnostics.NotExhaustiveObjectSwitch, switchKeyword.GetLocation(), uncoveredType.GetFullName());
                 context.ReportDiagnostic(diagnostic);
             }
         }
@@ -27,33 +22,25 @@ namespace ExhaustiveMatching.Analyzer
         #region Report Switch Diagnostics
         public static void ReportCasePatternNotSupported(this SyntaxNodeAnalysisContext context, CaseSwitchLabelSyntax switchLabel)
         {
-            var diagnostic = Diagnostic.Create(
-                Diagnostics.CasePatternNotSupported,
-                switchLabel.Value.GetLocation(), switchLabel.Value.ToString());
+            var diagnostic = Diagnostic.Create(Diagnostics.CasePatternNotSupported, switchLabel.Value.GetLocation(), switchLabel.Value.ToString());
             context.ReportDiagnostic(diagnostic);
         }
 
         public static void ReportCasePatternNotSupported(this SyntaxNodeAnalysisContext context, PatternSyntax pattern)
         {
-            var diagnostic = Diagnostic.Create(
-                Diagnostics.CasePatternNotSupported,
-                pattern.GetLocation(), pattern.ToString());
+            var diagnostic = Diagnostic.Create(Diagnostics.CasePatternNotSupported,pattern.GetLocation(), pattern.ToString());
             context.ReportDiagnostic(diagnostic);
         }
 
         public static void ReportOpenTypeNotSupported(this SyntaxNodeAnalysisContext context, ITypeSymbol type, ExpressionSyntax switchStatementExpression)
         {
-            var diagnostic = Diagnostic.Create(
-                Diagnostics.OpenTypeNotSupported,
-                switchStatementExpression.GetLocation(), type.GetFullName());
+            var diagnostic = Diagnostic.Create(Diagnostics.OpenTypeNotSupported, switchStatementExpression.GetLocation(), type.GetFullName());
             context.ReportDiagnostic(diagnostic);
         }
 
         public static void ReportWhenClauseNotSupported(this SyntaxNodeAnalysisContext context, WhenClauseSyntax whenClause)
         {
-            var diagnostic = Diagnostic.Create(
-                                Diagnostics.WhenGuardNotSupported,
-                                whenClause.GetLocation());
+            var diagnostic = Diagnostic.Create(Diagnostics.WhenGuardNotSupported, whenClause.GetLocation());
             context.ReportDiagnostic(diagnostic);
         }
         #endregion

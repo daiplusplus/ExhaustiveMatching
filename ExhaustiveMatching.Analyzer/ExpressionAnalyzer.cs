@@ -9,23 +9,14 @@ namespace ExhaustiveMatching.Analyzer
 {
     internal static class ExpressionAnalyzer
     {
-        public static SwitchStatementKind SwitchStatementKindForThrown(
-            SyntaxNodeAnalysisContext context,
-            ExpressionSyntax thrownExpression)
+        public static SwitchStatementKind SwitchStatementKindForThrown(SyntaxNodeAnalysisContext context, ExpressionSyntax thrownExpression)
         {
             var exceptionType = context.SemanticModel.GetTypeInfo(thrownExpression, context.CancellationToken).Type;
             if (exceptionType == null || exceptionType.TypeKind == TypeKind.Error)
                 return new SwitchStatementKind(isExhaustive: false, throwsInvalidEnum: false);
 
-            // TODO GetTypeByMetadataName returns null if multiple types match. This isn't the way to do this
-            var exhaustiveMatchFailedExceptionType =
-                context.Compilation.GetTypeByMetadataName(TypeNames.ExhaustiveMatchFailedException);
-            var invalidEnumArgumentExceptionType =
-                context.Compilation.GetTypeByMetadataName(TypeNames.InvalidEnumArgumentException);
-
-            var isExhaustiveMatchFailedException = exceptionType.EqualsConsideringNullability(exhaustiveMatchFailedExceptionType);
-            var isInvalidEnumArgumentException = exceptionType.EqualsConsideringNullability(invalidEnumArgumentExceptionType);
-            var isExhaustive = isExhaustiveMatchFailedException || isInvalidEnumArgumentException;
+            var isExhaustive = exceptionType.IsAConfiguredExhaustiveExceptionType(context);
+            var isInvalidEnumArgumentException = exceptionType.IsInvalidEnumArgumentException();
 
             return new SwitchStatementKind(isExhaustive, isInvalidEnumArgumentException);
         }

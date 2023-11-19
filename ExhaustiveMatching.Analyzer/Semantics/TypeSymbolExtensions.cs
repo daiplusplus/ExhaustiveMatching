@@ -139,7 +139,7 @@ namespace ExhaustiveMatching.Analyzer.Semantics
             this ITypeSymbol rootType,
             INamedTypeSymbol closedAttributeType)
         {
-            var types = new HashSet<ITypeSymbol>();
+            var types = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
             var queue = new Queue<ITypeSymbol>();
             queue.Enqueue(rootType);
 
@@ -182,7 +182,7 @@ namespace ExhaustiveMatching.Analyzer.Semantics
 
         public static bool TryGetStructurallyClosedTypeCases(this ITypeSymbol rootType, SyntaxNodeAnalysisContext context, out HashSet<ITypeSymbol> allCases)
         {
-            allCases = new HashSet<ITypeSymbol>();
+            allCases = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
 
             if (rootType is INamedTypeSymbol namedType
                 && rootType.TypeKind != TypeKind.Error
@@ -201,7 +201,7 @@ namespace ExhaustiveMatching.Analyzer.Semantics
                     .Where(t => t.IsSubtypeOf(rootType))
                     .ToArray();
 
-                if (nestedTypes.All(t => t.IsSealed || t is INamedTypeSymbol n && n.InstanceConstructors.All(c => c.DeclaredAccessibility == Accessibility.Private)))
+                if (nestedTypes.All(t => t.IsSealed || (t is INamedTypeSymbol n && n.InstanceConstructors.All(c => c.DeclaredAccessibility == Accessibility.Private))))
                 {
                     _ = allCases.Add(rootType);
                     allCases.UnionWith(nestedTypes);

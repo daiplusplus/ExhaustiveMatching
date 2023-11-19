@@ -100,9 +100,9 @@ namespace ExhaustiveMatching.Analyzer
             }
 
             var typesUsed = patterns
-                .Select(pattern => pattern.GetMatchedTypeSymbol(context, type, allCases, isClosed)!)  // returns null for invalid case clauses
+                .Select(pattern => pattern.GetMatchedTypeSymbol(context, type, allCases, isClosed))  // returns null for invalid case clauses
                 .WhereNotNull()
-                .ToImmutableHashSet();
+                .ToImmutableHashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
 
             // If it is an open type, we don't want to actually check for uncovered types, but
             // we still needed to check the switch cases
@@ -113,7 +113,7 @@ namespace ExhaustiveMatching.Analyzer
             }
 
             var uncoveredTypes = allConcreteTypes
-                .Where(t => !typesUsed.Any(t.IsSubtypeOf))
+                .Where(t => !typesUsed.Any(tu => t.IsSubtypeOf(tu)))
                 .ToArray();
 
             context.ReportNotExhaustiveObjectSwitch(switchExpression.SwitchKeyword, uncoveredTypes);
