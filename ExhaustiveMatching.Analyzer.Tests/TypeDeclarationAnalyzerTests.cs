@@ -186,7 +186,7 @@ namespace TestNamespace
 
         /// <summary>
         /// Previous versions of the analyzer would throw an exception when encountering
-        /// invalid arguments to <see cref="ClosedAttribute"/>.
+        /// invalid arguments to <c>ClosedAttribute</c>
         /// </summary>
         [Fact]
         public async Task EmptyTypeofArgumentToClosedAttributeHandled()

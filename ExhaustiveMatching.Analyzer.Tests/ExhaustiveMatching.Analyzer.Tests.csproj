@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ExhaustiveMatching.Analyzer.Testing\ExhaustiveMatching.Analyzer.Testing.csproj" />
     <ProjectReference Include="..\ExhaustiveMatching.Analyzer\ExhaustiveMatching.Analyzer.csproj" />
-    <ProjectReference Include="..\ExhaustiveMatching\ExhaustiveMatching.csproj" />
   </ItemGroup>
 
 </Project>

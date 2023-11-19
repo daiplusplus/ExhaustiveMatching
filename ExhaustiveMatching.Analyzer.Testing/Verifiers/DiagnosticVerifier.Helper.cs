@@ -24,7 +24,7 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
         private static readonly MetadataReference CodeAnalysisReference = MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
         private static readonly MetadataReference SystemConsoleReference = MetadataReference.CreateFromFile(typeof(Console).Assembly.Location);
         private static readonly MetadataReference ComponentModelReference = MetadataReference.CreateFromFile(typeof(InvalidEnumArgumentException).Assembly.Location);
-        private static readonly MetadataReference ExhaustiveMatchingReference = MetadataReference.CreateFromFile(typeof(ExhaustiveMatch).Assembly.Location);
+//      private static readonly MetadataReference ExhaustiveMatchingReference = MetadataReference.CreateFromFile(typeof(ExhaustiveMatch).Assembly.Location);
 
         internal static string DefaultFilePathPrefix = "Test";
         internal static string CSharpDefaultFileExt = "cs";
@@ -54,7 +54,9 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
         {
             var projects = new HashSet<Project>();
             foreach (var document in documents)
-                projects.Add(document.Project);
+            {
+                _ = projects.Add(document.Project);
+            }
 
             var diagnostics = new List<Diagnostic>();
             foreach (var project in projects)
@@ -157,7 +159,8 @@ namespace ExhaustiveMatching.Analyzer.Testing.Verifiers
                 .AddMetadataReference(projectId, ComponentModelReference)
                 .AddMetadataReference(projectId, systemRuntimePath)
                 .AddMetadataReference(projectId, netstandardPath)
-                .AddMetadataReference(projectId, ExhaustiveMatchingReference);
+//              .AddMetadataReference(projectId, ExhaustiveMatchingReference)
+            ;
 
             var count = 0;
             foreach (var source in sources)
